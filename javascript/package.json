@@ -1,0 +1,16 @@
+{
+    "name": "start-reactor-for-console",
+    "version": "0.0.1",
+    "description": "Start Reactor is a long task in Among Us to run in the console",
+    "main": "app.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "colors": "^1.4.0",
+        "sound-play": "^1.0.5"
+    }
+}
