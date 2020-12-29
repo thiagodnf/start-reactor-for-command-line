@@ -20,6 +20,13 @@ Start Reactor is a long task in Among Us to run in the command line
 [![MIT Licence](https://badges.frapsoft.com/os/mit/mit.svg?v=103)](https://opensource.org/licenses/mit-license.php)
 [![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://github.com/ellerbrock/open-source-badges/)
 
+## Install
+
+
+
+## Screenshots
+
+![ezgif com-video-to-gif](https://user-images.githubusercontent.com/114015/103257681-33d1af00-4960-11eb-9a42-f8439fcadcdd.gif)
 
 ## Questions or Suggestions
 
