@@ -6,9 +6,9 @@
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1"
     },
-    "keywords": [],
-    "author": "",
-    "license": "ISC",
+    "keywords": ["among-us", "start-reactor", "console"],
+    "author": "Thiago Ferreira",
+    "license": "MIT",
     "dependencies": {
         "colors": "^1.4.0",
         "sound-play": "^1.0.5"
