@@ -4,9 +4,14 @@
     "description": "Start Reactor is a long task in Among Us to run in the command line",
     "main": "app.js",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "start": "node app.js"
     },
-    "keywords": ["among-us", "start-reactor", "console", "command-line"],
+    "keywords": [
+        "among-us",
+        "start-reactor",
+        "console",
+        "command-line"
+    ],
     "author": "Thiago Ferreira",
     "license": "MIT",
     "dependencies": {
