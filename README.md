@@ -24,10 +24,10 @@ Start Reactor is a long task in Among Us to run in the command line
 
 ### Javascript
 
-Install Node.js on your localhost 
+Install Node.js on your localhost and run:
 
 ```console
-node install && node start
+npm install && npm start
 ```
 
 ## Screenshots
