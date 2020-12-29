@@ -1,12 +1,12 @@
 {
-    "name": "start-reactor-for-console",
+    "name": "start-reactor-for-command-line",
     "version": "0.0.1",
-    "description": "Start Reactor is a long task in Among Us to run in the console",
+    "description": "Start Reactor is a long task in Among Us to run in the command line",
     "main": "app.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1"
     },
-    "keywords": ["among-us", "start-reactor", "console"],
+    "keywords": ["among-us", "start-reactor", "console", "command-line"],
     "author": "Thiago Ferreira",
     "license": "MIT",
     "dependencies": {
