@@ -95,15 +95,19 @@ int randElement(int array[], int size) {
     return array[index];
 }
 
+string toString(int num){
+    return to_string(num);
+}
+
 void drawLine(int lineId, int number) {
 
     string p1 = lineId == number ? "X" : " ";
     string p2 = lineId + 1 == number ? "X" : " ";
     string p3 = lineId + 2 == number ? "X" : " ";
 
-    string l1 = to_string(lineId);
-    string l2 = to_string(lineId + 1);
-    string l3 = to_string(lineId + 2);
+    string l1 = toString(lineId);
+    string l2 = toString(lineId + 1);
+    string l3 = toString(lineId + 2);
 
     println("|       |       |       |     |       |       |       |");
     println("|   "+p1+"   |   "+p2+"   |   "+p3+"   |     |   "+l1+"   |   "+l2+"   |   "+l3+"   |");
