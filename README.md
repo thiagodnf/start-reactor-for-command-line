@@ -42,7 +42,7 @@ Access the folder and run the following command:
 
 ```console
 g++ -o main -lncurses main.cpp && ./main
-```console
+```
 
 ## Screenshots
 
