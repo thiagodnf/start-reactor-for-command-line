@@ -19,11 +19,68 @@ const audio = {
     "fail": "audio/fail.mp3",
     "start": "audio/start.mp3",
     play: async (key) => {
-        await sound.play(audio[key]);
+
+        if (audio[key]) {
+            await sound.play(audio[key]);
+        }
     }
 };
 
-async function getInputKey() {
+const SPEED = 300;
+
+function print(text) {
+    
+    if (!(text instanceof String)) {
+        text = text.toString();
+    }
+
+    process.stdout.write(text);
+}
+
+function println(text) {
+    
+    if (text) {
+        console.log(text);
+    } else {
+        console.log();
+    }
+}
+
+// function println() {
+    
+// }
+
+function printLogo() {
+
+    println("  _____ _             _     _____                 _                   ".green);
+    println(" / ____| |           | |   |  __ \\               | |                 ".green);
+    println("| (___ | |_ __ _ _ __| |_  | |__) |___  __ _  ___| |_ ___  _ __       ".green);
+    println(" \\___ \\| __/ _` | '__| __| |  _  // _ \\/ _` |/ __| __/ _ \\| '__|  ".green);
+    println(" ____) | || (_| | |  | |_  | | \\ \\  __/ (_| | (__| || (_) | |       ".green);
+    println("|_____/ \\__\\__,_|_|   \\__| |_|  \\_\\___|\\__,_|\\___|\\__\\___/|_|".green);
+
+    println();
+}
+
+function printHeader() {
+
+    println("Contribute at https://github.com/thiagodnf/start-reactor-for-console");
+    println();
+}
+
+function pressEnterToStart() {
+
+    println("Press any key to start...");
+   
+    return getInputKeyAsChar();
+}
+
+function clearScreen() {
+    console.clear();
+    printLogo();
+}
+
+async function getInputKeyAsChar() {
 
     return await new Promise(function (resolve, reject) {
 
@@ -42,9 +99,13 @@ async function getInputKey() {
     });
 }
 
-function clearScreen() {
-    console.clear();
-    printLogo();
+async function getInputKeyAsInteger() {
+
+    const key = await getInputKeyAsChar();
+    
+    const x = key;
+    
+    return x;
 }
 
 /**
@@ -58,59 +119,19 @@ function randInteger(min, max) {
     );
 }
 
-function randIndex(array) {
-    return randInteger(0, array.length);;
+function randIndex(array, size) {
+    return randInteger(0, size);;
 }
 
-function randElement(array) {
-    return array[randIndex(array)];
+function randElement(array, size) {
+
+    let index = randIndex(array, size);
+
+    return array[index]
 }
 
-function pause(ms) {
-
-    return new Promise(resolve => {
-        setTimeout(resolve, ms)
-    });
-}
-
-function equals(array1, array2, index) {
-
-    for (let i = 0; i <= index; i++) {
-
-        const a = parseInt(array1[i]);
-        const b = parseInt(array2[i]);
-
-        if (a !== b) {
-            return false;
-        }
-    }
-
-    return true;
-}
-
-function pressEnterToStart() {
-
-    console.log("Press any key to start...");
-
-    return getInputKey();
-}
-
-function print(text) {
-
-    if (!(text instanceof String)) {
-        text = text.toString();
-    }
-
-    process.stdout.write(text);
-}
-
-function println(text) {
-
-    if (text) {
-        console.log(text);
-    } else {
-        console.log();
-    }
+function toString(num){
+    return num.toString();
 }
 
 function drawLine(lineId, number) {
@@ -119,8 +140,12 @@ function drawLine(lineId, number) {
     const p2 = lineId + 1 == number ? "X" : " ";
     const p3 = lineId + 2 == number ? "X" : " ";
 
+    const l1 = toString(lineId);
+    const l2 = toString(lineId + 1);
+    const l3 = toString(lineId + 2);
+
     println("|       |       |       |     |       |       |       |");
-    println(`|   ${p1}   |   ${p2}   |   ${p3}   |     |   ${lineId}   |   ${lineId + 1}   |   ${lineId + 2}   |`);
+    println("|   "+p1+"   |   "+p2+"   |   "+p3+"   |     |   "+l1+"   |   "+l2+"   |   "+l3+"   |");
     println("|       |       |       |     |       |       |       |");
     println("+-------+-------+-------+     +-------+-------+-------+");
 }
@@ -134,85 +159,110 @@ function drawKeyPad(number) {
     drawLine(7, number);
 }
 
-async function printComplete() {
+function drawEmptyKeyPad() {
+    
+    drawKeyPad(0);
+}
+
+function sleep(time){
+    
+    return new Promise(resolve => {
+        setTimeout(resolve, time)
+    });
+}
+
+async function play(key){
+    await audio.play(key);
+}
+
+function playNumber(number){
+
+    audio.play("n" + number);
+}
+
+function equals(array1, array2, index){
+    
+    for (let i = 0; i <= index; i++) {
+    
+        const a = array1[i];
+        const b = array2[i];
+
+        if (a != b) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+function printFail() {
+    
     clearScreen();
-    audio.play("complete");
+    play("fail");
 
     println("+-----------------------+");
-    println("|       Complete        |")
+    println("|         Fail          |");
     println("+-----------------------+");
     println();
-
-    await getInputKey();
 }
 
-async function printFail() {
+function printComplete() {
+    
     clearScreen();
-    audio.play("fail");
+    play("complete");
 
     println("+-----------------------+");
-    println("|         Fail          |")
-    println("+-------+-------+-------+");
-    println();
-
-    await getInputKey();
-}
-
-function printLogo() {
-
-    println("  _____ _             _     _____                 _                   ".green);
-    println(" / ____| |           | |   |  __ \\               | |                 ".green);
-    println("| (___ | |_ __ _ _ __| |_  | |__) |___  __ _  ___| |_ ___  _ __       ".green);
-    println(" \\___ \\| __/ _` | '__| __| |  _  // _ \\/ _` |/ __| __/ _ \\| '__|  ".green);
-    println(" ____) | || (_| | |  | |_  | | \\ \\  __/ (_| | (__| || (_) | |       ".green);
-    println("|_____/ \\__\\__,_|_|   \\__| |_|  \\_\\___|\\__,_|\\___|\\__\\___/|_|".green);
-    println();
-}
-
-function printHeader() {
-
-    println("Contribute at https://github.com/thiagodnf/start-reactor-for-console");
+    println("|       Complete        |");
+    println("+-----------------------+");
     println();
 }
 
 async function turn() {
 
     clearScreen();
-    drawKeyPad(0);
-    await audio.play("start");
-
+    drawEmptyKeyPad();
+    await play("start");
+    
     const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-    const computerSequence = [randElement(numbers)];
+
+    const pcSequence = new Array(5);
+    let pcIndex = 0;
+    
+    pcSequence[pcIndex] = randElement(numbers, 9);
+    pcIndex++;
 
     while (true) {
 
         clearScreen();
-        drawKeyPad(0);
-        await pause(400);
-
-        for (let i = 0; i < computerSequence.length; i++) {
+        drawEmptyKeyPad();
+        await sleep(SPEED);
+        
+        for (let i = 0; i < pcIndex; i++) {
             clearScreen();
-            drawKeyPad(computerSequence[i]);
-            audio.play("n" + computerSequence[i]);
-            await pause(600);
+            drawKeyPad(pcSequence[i]);
+            playNumber(pcSequence[i]); 
+            await sleep(SPEED);
+
+            clearScreen();
+            drawEmptyKeyPad();
+            await sleep(SPEED);
         }
+        
+        const userSequence = new Array(5);
+        let userIndex = 0;
 
-        clearScreen();
-        drawKeyPad(0);
+        for (let i = 0; i < pcIndex; i++) {
 
-        const userSequence = [];
+            const pressedKey = await getInputKeyAsInteger();
+            
+            playNumber(pressedKey);
 
-        for (let i = 0; i < computerSequence.length; i++) {
+            userSequence[userIndex] = pressedKey;
+            userIndex++;
 
-            const pressedKey = await getInputKey();
+            if (equals(pcSequence, userSequence, i)) {
 
-            audio.play("n" + pressedKey);
-
-            userSequence.push(pressedKey);
-
-            if (equals(computerSequence, userSequence, i)) {
-
-                if (userSequence.length == 5) {
+                if (userIndex == 5) {
                     printComplete();
                     return;
                 }
@@ -223,13 +273,19 @@ async function turn() {
             }
         }
 
-        await pause(400);
-        computerSequence.push(randElement(numbers));
+        pcSequence[pcIndex] = randElement(numbers, 9);
+        pcIndex++;
     }
 }
 
-async function main() {
+function init(){
+    
+}
 
+async function main(){
+
+    init();
+	
     clearScreen();
 
     printHeader();
@@ -243,17 +299,16 @@ async function main() {
         println("Do you want to continue?");
         println("  1 - Yes");
         println("  2 - No");
-        print("Option: ");
+        println("Option: ");
 
-        const pressedKey = await getInputKey();
+        const pressedKey = await getInputKeyAsChar();
 
-        // Any other typed option will lead the player to play again
-        if (pressedKey === "2") {
+        // If the user type any other key other 
+        // than 2, the game will restart
+        if (pressedKey == '2') {
             break;
         }
     }
-
-    process.exit();
 }
 
 main();
