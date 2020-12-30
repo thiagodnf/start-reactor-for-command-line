@@ -44,6 +44,14 @@ Access the folder and run the following command:
 g++ -o main -lncurses main.cpp && ./main
 ```
 
+### Java
+
+Access the folder and run the following command:
+
+```console
+javac Main.java && java Main
+```
+
 ## Screenshots
 
 ![ezgif com-video-to-gif](https://user-images.githubusercontent.com/114015/103257681-33d1af00-4960-11eb-9a42-f8439fcadcdd.gif)
